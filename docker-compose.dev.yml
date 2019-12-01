@@ -3,6 +3,9 @@ services:
   buster-js-app:
     ports:
       - '4242:4242'
+  buster-python-app:
+    ports:
+      - '8082:8082'
   buster-java-app:
     ports:
       - '8080:8080'
