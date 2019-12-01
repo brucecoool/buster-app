@@ -41,6 +41,20 @@ services:
       - buster-app-mysql
     volumes:
       - ./python:/opt/app
+  buster-java-app:
+    image: buster-java-app
+    build:
+      context: java
+      dockerfile: Dockerfile
+    ports:
+      - '8080'
+    environment:
+      BUSTER_API_URL: http://34.102.239.194
+      SPRING_DATASOURCE_URL: jdbc:mysql://buster-app-mysql:3306/buster_dev
+      SPRING_DATASOURCE_USERNAME: dev
+      SPRING_DATASOURCE_PASSWORD: password123
+    depends_on:
+      - buster-app-mysql
   buster-app-mysql:
     image: 'mysql:5.7'
     command: "--character-set-server='utf8mb4' --collation-server='utf8mb4_unicode_ci'"
@@ -55,7 +69,9 @@ services:
       MYSQL_DATABASE: buster_dev
   buster-ngrok:
     image: 'wernight/ngrok'
+    links:
+      - buster-java-app
     environment:
-      NGROK_PORT: 4242
+      NGROK_PORT: buster-java-app:8080
     ports:
-      - '80'
+      - '4040'

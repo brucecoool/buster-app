@@ -3,12 +3,12 @@ services:
   buster-js-app:
     ports:
       - '4242:4242'
-  buster-python-app:
+  buster-java-app:
     ports:
-      - '8082:8082'
+      - '8080:8080'
   buster-app-mysql:
     ports:
       - '43308:3306'
   buster-ngrok:
     ports:
-      - '8083:80'
+      - '4040:4040'

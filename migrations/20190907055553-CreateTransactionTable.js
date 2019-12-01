@@ -40,6 +40,8 @@ exports.up = function(db) {
       defaultValue: 'CURRENT_TIMESTAMP',
       notNull: true,
     },
+  }).then(() => {
+    return db.addIndex('transaction', 'reference_id_index', ['reference_id']);
   });
 };
 
